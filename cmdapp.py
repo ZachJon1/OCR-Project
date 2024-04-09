@@ -27,23 +27,16 @@ def main():
         image = cv2.imread(args.image_path)
         image = preProcess.ImagePreprocessor.grayScale(image)
         image = preProcess.ImagePreprocessor.removeNoise(image)
-        image = preProcess.ImagePreprocessor.thresholding(image)
-        image = preProcess.ImagePreprocessor.canny(image)
-        # save the preprocessed image to different path
-        cv2.imwrite('./preProcessed/preprocessed_image.jpg', image)
+        #image = preProcess.ImagePreprocessor.thresholding(image)
+        #image = preProcess.ImagePreprocessor.canny(image)
+        
         
     if args.plot:
-        # plot the image after preprocessing
-        image = cv2.imread(args.image_path)
-        image = preProcess.ImagePreprocessor.grayScale(image)
-        image = preProcess.ImagePreprocessor.removeNoise(image)
-        image = preProcess.ImagePreprocessor.thresholding(image)
-        image = preProcess.ImagePreprocessor.canny(image)
         plot.plotImage(image, 'Preprocessed Image')
         
     # apply OCR to preprocessed image
     text = applyOCR.applyOCR(image)
-    applyOCR.saveText(text, args.output_path)
+    applyOCR.saveText(text)
     logging.info('Text extracted successfully.')
     logging.info(f'Text saved to {args.output_path}')
     
